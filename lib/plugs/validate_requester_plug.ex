@@ -16,11 +16,10 @@ defmodule ReflectPlugs.ValidateRequesterPlug do
 
   alias Services.ValidateTokenService
 
-  @reflect_token_header System.get_env("REFLECT_AUTH_TOKEN_HEADER")
-
   def init(default), do: default
 
-  def call(conn, %{"requester_type" => requester_type}) do
+  def call(conn, _) do
+    requester_type = conn.params["requester_type"]
     case get_token(conn) do
       {:ok, token} ->
         case ValidateTokenService.validate(requester_type, token) do
@@ -43,9 +42,10 @@ defmodule ReflectPlugs.ValidateRequesterPlug do
   end
 
   defp get_token(conn) do
-    case Plug.Conn.get_req_header(conn, @reflect_token_header) do
-      [reflect_auth_token] -> {:ok, reflect_auth_token}
-      _ -> {:error, :missing_auth_header}
+    tokenKey = System.get_env("REFLECT_AUTH_TOKEN_HEADER")
+    case Enum.find_value(conn.req_headers, fn {key, val} -> if key == tokenKey, do: val end)  do
+      nil -> {:error, :missing_auth_header}
+      reflect_auth_token -> {:ok, reflect_auth_token}
     end
   end
 end

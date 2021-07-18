@@ -1,8 +1,9 @@
 defmodule Services.ValidateTokenService do
   def validate(requester_type, token) do
-    Tesla.get(
+    Tesla.post(
       client(requester_type, token),
-      "#{requester_type}/validate_token"
+      "#{requester_type}/validate_token",
+      %{}
     )
   end
 
