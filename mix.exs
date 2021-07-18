@@ -31,7 +31,7 @@ defmodule ReflectPlugs.MixProject do
 
   defp description do
     """
-      Reflect Plugs contains common plugs used across Reflect APIS.
+      Reflect Plugs contains common plugs used across Reflect APIs.
     """
   end
 end

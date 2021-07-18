@@ -1,6 +1,6 @@
 # ReflectPlugs
 
-**TODO: Add description**
+**Reflect Plugs contains common plugs used across Reflect APIs.**
 
 ## Installation
 
@@ -10,7 +10,7 @@ by adding `reflect_plugs` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:reflect_plugs, "~> 0.1.0"}
+    {:reflect_plugs, git: "https://github.com/reflect-org/reflect-plugs", branch: "main"}
   ]
 end
 ```
