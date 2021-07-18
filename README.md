@@ -7,7 +7,7 @@
 ```elixir
 def deps do
   [
-    {:reflect_plugs, git: "https://github.com/reflect-org/reflect-plugs", branch: "main"}
+    {:reflect_plugs, git: "https://github.com/reflect-org/reflect-plugs", tag: "0.1.0"}
   ]
 end
 ```
