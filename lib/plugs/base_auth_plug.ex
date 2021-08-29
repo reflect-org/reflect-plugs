@@ -3,14 +3,12 @@ defmodule ReflectPlugs.BaseAuthPlug do
     quote do
       import Plug.Conn
 
-      alias ReflectApi.Repo
-
       def init(default), do: default
 
       def call(conn, _default) do
         case extract_token(conn) do
           {:ok, token} ->
-            case Repo.get_by(model(), %{token: token}) do
+            case repo().get_by(model(), %{token: token}) do
               nil -> unauthorized(conn)
               current_user -> authorized(conn, current_user)
             end
